@@ -32,7 +32,7 @@ _global_script_classes=[ {
 "base": "BaseStats",
 "class": "EquipmentStats",
 "language": "GDScript",
-"path": "res://equipment_stats.gd"
+"path": "res://character/equipment/equipment_stats.gd"
 }, {
 "base": "PanelContainer",
 "class": "GistItem",
