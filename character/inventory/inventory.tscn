@@ -1,0 +1,11 @@
+[gd_scene format=2]
+
+[node name="Inventory" type="Node"]
+
+[node name="Healing" type="Node" parent="."]
+
+[node name="Consumables" type="Node" parent="."]
+
+[node name="Equipment" type="Node" parent="."]
+
+[node name="Ores" type="Node" parent="."]

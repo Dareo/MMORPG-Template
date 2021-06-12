@@ -1,0 +1,13 @@
+[gd_scene format=2]
+
+[node name="Equipment" type="Node"]
+
+[node name="Weapon" type="Node" parent="."]
+
+[node name="Body" type="Node" parent="."]
+
+[node name="AdditionalGear" type="Node" parent="."]
+
+[node name="Accessories" type="Node" parent="."]
+
+[node name="SpecialEquipment" type="Node" parent="."]

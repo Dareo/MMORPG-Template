@@ -1,0 +1,109 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Node",
+"class": "BaseStats",
+"language": "GDScript",
+"path": "res://stats/base_stats/base_stats.gd"
+}, {
+"base": "KinematicBody",
+"class": "BasicController",
+"language": "GDScript",
+"path": "res://controllers/basic_controller.gd"
+}, {
+"base": "BasicController",
+"class": "Character",
+"language": "GDScript",
+"path": "res://character/character.gd"
+}, {
+"base": "HBoxContainer",
+"class": "ContributorClass",
+"language": "GDScript",
+"path": "res://addons/github-integration/scripts/ContributorClass.gd"
+}, {
+"base": "BaseStats",
+"class": "EquipmentStats",
+"language": "GDScript",
+"path": "res://equipment_stats.gd"
+}, {
+"base": "PanelContainer",
+"class": "GistItem",
+"language": "GDScript",
+"path": "res://addons/github-integration/scripts/GistItem.gd"
+}, {
+"base": "HBoxContainer",
+"class": "InvitationItem",
+"language": "GDScript",
+"path": "res://addons/github-integration/scripts/InvitationItem.gd"
+}, {
+"base": "Node",
+"class": "Level",
+"language": "GDScript",
+"path": "res://stats/level/level.gd"
+}, {
+"base": "BasicController",
+"class": "Monster",
+"language": "GDScript",
+"path": "res://monster/monster.gd"
+}, {
+"base": "PanelContainer",
+"class": "RepositoryItem",
+"language": "GDScript",
+"path": "res://addons/github-integration/scripts/RepositoryItem.gd"
+}, {
+"base": "Node",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://state_machine/state_machine.gd"
+}, {
+"base": "BaseStats",
+"class": "stats",
+"language": "GDScript",
+"path": "res://stats/stats.gd"
+} ]
+_global_script_class_icons={
+"BaseStats": "",
+"BasicController": "",
+"Character": "",
+"ContributorClass": "",
+"EquipmentStats": "",
+"GistItem": "",
+"InvitationItem": "",
+"Level": "",
+"Monster": "",
+"RepositoryItem": "",
+"StateMachine": "",
+"stats": ""
+}
+
+[application]
+
+config/name="Target based combat mmo"
+config/icon="res://icon.png"
+
+[autoload]
+
+PluginSettings="*res://addons/github-integration/scripts/PluginSettings.gd"
+IconLoaderGithub="*res://addons/github-integration/scripts/IconLoaderGithub.gd"
+UserData="*res://addons/github-integration/scripts/user_data.gd"
+RestHandler="*res://addons/github-integration/scenes/RestHandler.tscn"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/github-integration/plugin.cfg" )
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"

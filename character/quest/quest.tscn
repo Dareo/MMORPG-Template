@@ -1,0 +1,11 @@
+[gd_scene format=2]
+
+[node name="Quest" type="Node"]
+
+[node name="Main" type="Node" parent="."]
+
+[node name="1" type="Node" parent="."]
+
+[node name="2" type="Node" parent="."]
+
+[node name="3" type="Node" parent="."]
