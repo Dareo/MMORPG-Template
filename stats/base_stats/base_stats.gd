@@ -1,6 +1,6 @@
 extends Node
 
-class_name BaseStats
+class_name BaseStats ,"res://editor/icons/stats.svg"
 
 signal base_stats_updated
 signal level_up

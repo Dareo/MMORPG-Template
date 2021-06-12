@@ -39,10 +39,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/github-integration/scripts/GistItem.gd"
 }, {
+"base": "Node",
+"class": "Inventory",
+"language": "GDScript",
+"path": "res://character/inventory/inventory.gd"
+}, {
 "base": "HBoxContainer",
 "class": "InvitationItem",
 "language": "GDScript",
 "path": "res://addons/github-integration/scripts/InvitationItem.gd"
+}, {
+"base": "Node",
+"class": "Job",
+"language": "GDScript",
+"path": "res://character/class/class.gd"
 }, {
 "base": "Node",
 "class": "Level",
@@ -70,13 +80,15 @@ _global_script_classes=[ {
 "path": "res://stats/stats.gd"
 } ]
 _global_script_class_icons={
-"BaseStats": "",
+"BaseStats": "res://editor/icons/stats.svg",
 "BasicController": "",
 "Character": "",
 "ContributorClass": "",
 "EquipmentStats": "",
 "GistItem": "",
+"Inventory": "res://editor/icons/envetory.svg",
 "InvitationItem": "",
+"Job": "",
 "Level": "",
 "Monster": "",
 "RepositoryItem": "",
@@ -87,6 +99,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Target based combat mmo"
+run/main_scene="res://main.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -99,6 +112,29 @@ RestHandler="*res://addons/github-integration/scenes/RestHandler.tscn"
 [editor_plugins]
 
 enabled=PoolStringArray( "res://addons/github-integration/plugin.cfg" )
+
+[input]
+
+forward={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+back={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+ ]
+}
+left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [physics]
 

@@ -1,13 +1,50 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://character/character.gd" type="Script" id=1]
+[ext_resource path="res://stats/base_stats/base_stats.gd" type="Script" id=2]
+[ext_resource path="res://character/inventory/inventory.tscn" type="PackedScene" id=3]
+[ext_resource path="res://character/class/class.tscn" type="PackedScene" id=4]
+[ext_resource path="res://character/equipment/equipment.tscn" type="PackedScene" id=5]
+[ext_resource path="res://select/select.tscn" type="PackedScene" id=6]
+[ext_resource path="res://character/camera _pivot.gd" type="Script" id=7]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.606143
 
+[sub_resource type="CapsuleMesh" id=2]
+radius = 0.6
+
 [node name="Character" type="KinematicBody"]
+collision_layer = 2
 script = ExtResource( 1 )
+orintate_path = NodePath("CameraPivotH")
+
+[node name="Class" parent="." instance=ExtResource( 4 )]
+
+[node name="BaseStats" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="Equipment" parent="." instance=ExtResource( 5 )]
+
+[node name="CameraPivotH" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.23832, 0 )
+script = ExtResource( 7 )
+
+[node name="CameraPivotV" type="Spatial" parent="CameraPivotH"]
+
+[node name="CameraBoom" type="SpringArm" parent="CameraPivotH/CameraPivotV"]
+spring_length = 5.0
+
+[node name="Camera" type="Camera" parent="CameraPivotH/CameraPivotV/CameraBoom"]
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.10276, 0 )
 shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="CollisionShape"]
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="Inventory" parent="." instance=ExtResource( 3 )]
+
+[node name="Select" parent="." instance=ExtResource( 6 )]
