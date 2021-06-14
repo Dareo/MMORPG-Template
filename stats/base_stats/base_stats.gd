@@ -6,19 +6,20 @@ signal base_stats_updated
 signal level_up
 
 
-export var level : int
-export var max_level : int
+export var level : int = 1
+export var max_level : int = 256
 
 
-export var max_hp : int
-export var matk : int
-export var def : int
-export var mdef : int
-export var hit : int
-export var eva : int
-export var aspd : int
-export var cspd : int
+export var max_hp : int = 100
+export var matk : int = 10
+export var def : int = 10
+export var mdef : int = 10
+export var hit : int = 10
+export var eva : int = 10
+export var aspd : int = 10
+export var cspd : int = 10
 
+var cur_hp : int = max_hp
 
 func level_up():
 	emit_signal("level_up")

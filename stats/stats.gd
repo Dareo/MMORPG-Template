@@ -1,6 +1,6 @@
 extends BaseStats
 
-class_name stats
+class_name Stats
 
 
 """
@@ -30,6 +30,12 @@ export var AGI : int = 1
 export var DEX : int = 1
 export var CRT : int = 1
 
+
+# player exclusive base stats
+export var max_mp : int = 100
+var cur_mp : int = max_mp
+
+# min and max stats
 const MAX_STAT_AMOUNT : int = 256
 const MIN_STAT_AMOUNT : int = 1
 
@@ -37,7 +43,10 @@ const MIN_STAT_AMOUNT : int = 1
 var max_stats : int = 0
 var unasigned_stats : int = 0
 
+#using a string this function checks for each stats and return the stat asked for
 func get_stat(var stat : String) -> int:
+	
+	# takeing the state
 	var stat_return : int = 0
 	match stat:
 		"STR":
@@ -61,9 +70,10 @@ func get_stat(var stat : String) -> int:
 			stat_return = -1
 			
 	return stat_return
-		
+	
 			
 func set_stat(var stat : String, var amount : int) -> void:
+	# creates an array and checks for overflow and reasigns the stats acorendely
 	var stat_return : Array
 	match stat:
 		"STR":
@@ -92,9 +102,11 @@ func set_stat(var stat : String, var amount : int) -> void:
 			stat_return = caculate_stat_value(CRT, amount)
 			CRT = stat_return[0]
 			unasigned_stats += stat_return[1]
-			
-			
-			
+
+func calculate_base_stats():
+	pass
+	
+	
 func caculate_stat_value(var prev_value : int, var added_value : int) -> Array:
 	var return_amount : Array
 	var new_amount : int = prev_value + added_value
@@ -114,3 +126,8 @@ func caculate_stat_value(var prev_value : int, var added_value : int) -> Array:
 		carry_over = 0
 		
 	return [new_amount,carry_over]
+
+
+func take_damage():
+	self.cur_hp -= 10
+	print(self.name, " has taken 10 damage, hp is now", self.cur_hp)

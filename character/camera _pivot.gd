@@ -13,25 +13,26 @@ var min_lengh = 2
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
+
+
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		
+
+
 func  _input(event):
 	if event is InputEventMouseMotion:
 		rotation_degrees.y -= event.relative.x * mouse_sensitivity
 		camera_pivot.rotation_degrees.x -= event.relative.y * mouse_sensitivity
 		camera_pivot.rotation_degrees.x = clamp(camera_pivot.rotation_degrees.x, min_pitch, max_pitch)
-	
+
 	if event is InputEventMouseButton:
 		if event.is_pressed():
-			
+
 			if event.button_index == BUTTON_WHEEL_UP:
 				boom.spring_length += scroll_speed
 			if event.button_index == BUTTON_WHEEL_DOWN:
 				boom.spring_length -= scroll_speed
 			boom.spring_length = clamp(boom.spring_length, min_lengh, max_lengh)
-			
-			# call the zoom function	
-	
+
+

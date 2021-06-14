@@ -1,12 +1,73 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://monster/monster.gd" type="Script" id=1]
+[ext_resource path="res://monster/monster_stats.gd" type="Script" id=2]
+[ext_resource path="res://skills/skills.tscn" type="PackedScene" id=3]
+[ext_resource path="res://buffs/Buffs.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape" id=1]
 
+[sub_resource type="CapsuleMesh" id=2]
+
+[sub_resource type="CylinderShape" id=3]
+radius = 5.49856
+
+[sub_resource type="CylinderShape" id=5]
+radius = 16.1095
+
+[sub_resource type="CylinderShape" id=4]
+radius = 2.71986
+
 [node name="Monster" type="KinematicBody"]
 script = ExtResource( 1 )
+speed = 300.0
+hit_range = 1
+model_path = NodePath("HitBox/MeshInstance")
+orintate_path = NodePath(".")
 
 [node name="HitBox" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.49377, 0 )
 shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="HitBox"]
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="Skills" parent="." instance=ExtResource( 3 )]
+
+[node name="MonsterStats" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="Buffs" parent="." instance=ExtResource( 5 )]
+
+[node name="DetectionRange" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="DetectionRange"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.987319, 0 )
+shape = SubResource( 3 )
+
+[node name="max_follow_range" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="max_follow_range"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.991742, 0 )
+shape = SubResource( 5 )
+
+[node name="AttackRange" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="AttackRange"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.929433, 0 )
+shape = SubResource( 4 )
+
+[node name="idle_timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="attack_timer" type="Timer" parent="."]
+
+[connection signal="attack" from="." to="." method="_attack"]
+[connection signal="body_entered" from="DetectionRange" to="." method="body_entered_detection_range"]
+[connection signal="body_exited" from="max_follow_range" to="." method="stop_follow_range"]
+[connection signal="body_entered" from="AttackRange" to="." method="body_in_attack_range"]
+[connection signal="body_exited" from="AttackRange" to="." method="body_left_attack_range"]
+[connection signal="timeout" from="idle_timer" to="." method="idle_cycle"]
+[connection signal="timeout" from="attack_timer" to="." method="attack_cycle"]

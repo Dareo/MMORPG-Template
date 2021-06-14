@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://character/character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://monster/monster.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -60,5 +61,7 @@ material/0 = null
 shape = SubResource( 2 )
 
 [node name="Character" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.3374, 0, 0 )
-target_path = NodePath("../floor4")
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.557, 0, 0 )
+
+[node name="Monster" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.0444, 0, -20.3933 )
