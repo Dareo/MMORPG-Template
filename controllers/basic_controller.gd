@@ -23,7 +23,7 @@ var input_vector : Vector2
 var dirction : Vector3
 
 
-var target : BasicController
+var target = null
 var can_attack : bool = false
 
 export var orintate_path : NodePath

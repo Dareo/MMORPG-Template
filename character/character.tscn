@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://character/character.gd" type="Script" id=1]
 [ext_resource path="res://stats/stats.gd" type="Script" id=2]
 [ext_resource path="res://character/inventory/inventory.tscn" type="PackedScene" id=3]
 [ext_resource path="res://character/class/class.tscn" type="PackedScene" id=4]
 [ext_resource path="res://character/equipment/equipment.tscn" type="PackedScene" id=5]
+[ext_resource path="res://skills/skills.tscn" type="PackedScene" id=6]
 [ext_resource path="res://character/camera _pivot.gd" type="Script" id=7]
 [ext_resource path="res://buffs/Buffs.tscn" type="PackedScene" id=8]
 
@@ -14,12 +15,22 @@ radius = 0.606143
 [sub_resource type="CapsuleMesh" id=2]
 radius = 0.6
 
-[node name="Character" type="KinematicBody"]
+[sub_resource type="SphereShape" id=3]
+radius = 14.4895
+
+[sub_resource type="SphereShape" id=4]
+radius = 2.36162
+
+[node name="Character" type="KinematicBody" groups=[
+"player",
+]]
 collision_layer = 2
 script = ExtResource( 1 )
 orintate_path = NodePath("CameraPivotH")
 
 [node name="Class" parent="." instance=ExtResource( 4 )]
+
+[node name="Skills" parent="." instance=ExtResource( 6 )]
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -49,4 +60,24 @@ material/0 = null
 
 [node name="Inventory" parent="." instance=ExtResource( 3 )]
 
+[node name="TargetRange" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11273, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="TargetRange"]
+shape = SubResource( 3 )
+
+[node name="AttackRange" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="AttackRange"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11273, 0 )
+shape = SubResource( 4 )
+
+[node name="attack_timer" type="Timer" parent="."]
+
+[connection signal="attack" from="." to="." method="_attack"]
 [connection signal="take_damage" from="." to="Stats" method="take_damage"]
+[connection signal="body_entered" from="TargetRange" to="." method="body_entered_range"]
+[connection signal="body_exited" from="TargetRange" to="." method="body_left_range"]
+[connection signal="body_entered" from="AttackRange" to="." method="inside_attack_range"]
+[connection signal="body_exited" from="AttackRange" to="." method="outside_attack_range"]
+[connection signal="timeout" from="attack_timer" to="." method="attack_rate"]

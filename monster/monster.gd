@@ -2,6 +2,7 @@ extends BasicController
 
 class_name Monster
 
+
 onready var skills = $Skills
 onready var monsterstats = $MonsterStats
 onready var buffs = $Buffs
@@ -15,13 +16,13 @@ func _process_movement():
 
 
 func _on_Select_body_entered(body):
-	if body is Character:
+	if body.is_in_group("player"):
 		print(body.name)
 		self.target = body
 
 
 func body_entered_detection_range(body):
-	if body is Character:
+	if body.is_in_group("player"):
 		target = body
 		attack_timer.start()
 		idle_timer.stop()
@@ -57,3 +58,6 @@ func idle_cycle():
 
 func _attack():
 	target._take_damage()
+	
+func _take_damage():
+	emit_signal("take_damage")

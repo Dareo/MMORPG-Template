@@ -9,16 +9,18 @@
 
 [sub_resource type="CapsuleMesh" id=2]
 
-[sub_resource type="CylinderShape" id=3]
-radius = 5.49856
+[sub_resource type="SphereShape" id=3]
+radius = 5.38428
 
-[sub_resource type="CylinderShape" id=5]
-radius = 16.1095
+[sub_resource type="SphereShape" id=4]
+radius = 16.524
 
-[sub_resource type="CylinderShape" id=4]
-radius = 2.71986
+[sub_resource type="SphereShape" id=5]
+radius = 2.79085
 
-[node name="Monster" type="KinematicBody"]
+[node name="Monster" type="KinematicBody" groups=[
+"monster",
+]]
 script = ExtResource( 1 )
 speed = 300.0
 hit_range = 1
@@ -50,13 +52,13 @@ shape = SubResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="max_follow_range"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.991742, 0 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="AttackRange" type="Area" parent="."]
 
 [node name="CollisionShape" type="CollisionShape" parent="AttackRange"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.929433, 0 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="idle_timer" type="Timer" parent="."]
 wait_time = 5.0
@@ -65,6 +67,7 @@ autostart = true
 [node name="attack_timer" type="Timer" parent="."]
 
 [connection signal="attack" from="." to="." method="_attack"]
+[connection signal="take_damage" from="." to="MonsterStats" method="_take_damage"]
 [connection signal="body_entered" from="DetectionRange" to="." method="body_entered_detection_range"]
 [connection signal="body_exited" from="max_follow_range" to="." method="stop_follow_range"]
 [connection signal="body_entered" from="AttackRange" to="." method="body_in_attack_range"]
